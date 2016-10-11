@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import HealthKit
+
+var MTN_HEIGHT = 8848
+//let healthKitManager = HealthKitManager.sharedInstance
 
 class ViewController: UIViewController {
 
@@ -21,5 +25,9 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func Click(_ sender: UIButton) {
+        percentage.text = "100%"
+    }
+    @IBOutlet weak var percentage: UILabel!
 }
 
