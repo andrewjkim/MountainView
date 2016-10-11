@@ -10,7 +10,13 @@ import UIKit
 import HealthKit
 
 var MTN_HEIGHT = 8848
-//let healthKitManager = HealthKitManager.sharedInstance
+let healthStore: HKHealthStore? = {
+    if HKHealthStore.isHealthDataAvailable() {
+        return HKHealthStore()
+    } else {
+        return nil
+    }
+}()
 
 class ViewController: UIViewController {
 
@@ -26,6 +32,17 @@ class ViewController: UIViewController {
 
 
     @IBAction func Click(_ sender: UIButton) {
+        let flightCount = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.flightsClimbed)
+        let typesToRead = NSSet(object: flightCount)
+        healthStore?.requestAuthorization(toShare: nil, read: typesToRead as? Set<HKObjectType>, completion: { Void in
+//            if (success) {
+//                print("SUCCESS")
+//            } else {
+//                print(error)
+//            }
+        })
+        
+        
         percentage.text = "100%"
     }
     @IBOutlet weak var percentage: UILabel!
